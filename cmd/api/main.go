@@ -23,9 +23,15 @@ func main() {
 	svc := service.NewProductService(repo)
 	productHand := handler.NewProductHandler(svc)
 
+	userRepo := repository.NewUserRepository(db)
+	userSvc := service.NewUserService(userRepo)
+	userHand := handler.NewUserHandler(userSvc)
 
 
-	r := handler.SetupRoutes(productHand)
+
+
+
+	r := handler.SetupRoutes(productHand, userHand)
 
 	fmt.Println("Server na porta 8080")
 	err := http.ListenAndServe(":8080", r)

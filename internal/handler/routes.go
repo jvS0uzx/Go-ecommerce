@@ -7,7 +7,7 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-func SetupRoutes(productHand *ProductHandler) *chi.Mux {
+func SetupRoutes(productHand *ProductHandler, userHand *UserHandler) *chi.Mux {
 	r := chi.NewRouter()
 
 	r.Get("/ping", func(w http.ResponseWriter, r *http.Request) {
@@ -25,6 +25,8 @@ func SetupRoutes(productHand *ProductHandler) *chi.Mux {
 	})
 
 	r.Get("/produtos", productHand.GetAllProducts)
+
+	r.Post("/users", userHand.CreateUser)
 
 	return r
 }
